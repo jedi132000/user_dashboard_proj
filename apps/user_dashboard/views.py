@@ -19,7 +19,6 @@ def signin(request):
 def login(request):
     return redirect('/dashboard')
 
-
 def dashboard(request):
     return render(request, 'user_dashboard/dashboard.html')
 
@@ -30,9 +29,18 @@ def new_user(request):
     return render(request, 'user_dashboard/new.html')
 
 def edit(request):
-    pass
+    return render(request, 'user_dashboard/user_edit.html')
 
 def edit_user(request):
+    pass
+
+def update_user(request):
+    pass
+
+def update_pw(request):
+    pass
+
+def update_desc(request):
     pass
 
 def show_user(request):
@@ -40,3 +48,7 @@ def show_user(request):
 
 def post(request):
     pass
+
+def logout(request):
+    request.session.clear()
+    return redirect("/")

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Post
+# from .models import User, Post
 from django.contrib import messages
 # Create your views here.
 
@@ -29,3 +29,14 @@ def admin_dashboard(request):
 def new_user(request):
     return render(request, 'user_dashboard/new.html')
 
+def edit(request):
+    pass
+
+def edit_user(request):
+    pass
+
+def show_user(request):
+    pass
+
+def post(request):
+    pass

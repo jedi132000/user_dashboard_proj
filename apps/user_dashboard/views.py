@@ -32,7 +32,7 @@ def edit(request):
     return render(request, 'user_dashboard/user_edit.html')
 
 def edit_user(request):
-    pass
+    return render(request, 'user_dashboard/admin_edit.html')
 
 def update_user(request):
     pass
@@ -47,6 +47,9 @@ def show_user(request):
     pass
 
 def post(request):
+    pass
+
+def destroy(request):
     pass
 
 def logout(request):

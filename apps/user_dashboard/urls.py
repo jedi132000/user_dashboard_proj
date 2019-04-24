@@ -19,4 +19,5 @@ urlpatterns = [
     url(r'^users/show/(?P<user_id>\d+)/$', views.show_user, name='show_user'),
     url(r'^post/(?P<user_id>\d+)/$', views.post, name='post'),
     url(r'^logout/$', views.logout, name='logout'),
+    url(r'^remove/$', views.destroy, name='remove'),
 ]

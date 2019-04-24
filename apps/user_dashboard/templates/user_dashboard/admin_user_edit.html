@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Edit Profile</title>
+    <title>Edit User</title>
 </head>
 <body>
     <nav class="navbar navbar-light bg-light border-bottom border-dark">
@@ -22,7 +22,14 @@
     </nav>
     <main>
         <div class="container mt-4">
-            <h2 class="mb-4">Edit Profile</h2>
+            <div class="row">
+            <div class="col-md-4">
+                <h4>Edit User User ID</h4>
+            </div>
+            <div class="col-md-8">
+                <button class="float-right btn btn-primary border border-dark shadow-lg rounded-0">Return to Dashboard</button>
+            </div>
+        </div>
             <div class="row">
                 <div class="col-md-5 border border-dark">
                         <h4>Edit Information</h4>
@@ -38,6 +45,11 @@
                             <div class="form-group">
                                 <label for="lastname">Last Name:</label>
                                 <input type="text" class="form-control" name="last_name">
+                            </div>
+                            <div class="form-group">
+                                <select name="user_level">
+                                    <option value="admin">Admin</option>
+                                    <option value="normal">Normal</option>
                             </div>
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="float-right btn btn-success border border-dark shadow-lg rounded-0">Save</button>
@@ -61,19 +73,6 @@
                             </div>
                         </form>
                     </div>
-            </div>
-            <div class="row">
-            <div class="col-md-12 border border-dark mt-4">
-                <form action="/update_description/" method="POST">
-                    <div class="form-group">
-                        <label for="description">Edit Description</label>
-                        <textarea class="form-control border border-dark" name="user_description"></textarea>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="float-right btn btn-success border border-dark shadow-lg rounded-0">Save</button>
-                    </div>
-                </form>
-            </div>
             </div>
         </div>
     </main>

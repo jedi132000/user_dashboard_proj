@@ -27,6 +27,7 @@
                 <div class="col-md-5 border border-dark">
                         <h4>Edit Information</h4>
                         <form class="mb-4" action="/update_user/" method="POST">
+                            {% csrf_token %}
                             <div class="form-group">
                                 <label for="email">Email Address:</label>
                                 <input type="text" class="form-control" name="email">
@@ -48,6 +49,7 @@
                     <div class="col-md-5 border border-dark">
                         <h4>Change Password</h4>
                         <form class="mb-4" action="/update_password/" method="POST">
+                            {% csrf_token %}
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" name="password">

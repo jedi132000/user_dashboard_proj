@@ -33,6 +33,7 @@
             <div class="row">
                 <div class="col-md-12 border border-dark mt-4">
                     <form action="/post/" method="POST">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label for="description">Leave a message for Michael</label>
                             <textarea class="form-control border border-dark" name="user_description"></textarea>

@@ -117,6 +117,10 @@ class CommentManager(models.Manager):
             comment_sender=User.objects.get(id=user_id),
             target_post=Post.objects.get(id=post_id)
         )
+        print('-' * 50)
+        print(post_id)
+        print(comment.target_post.id)
+        print('-' * 50)
         return comment.id
 
 class Comment(models.Model):

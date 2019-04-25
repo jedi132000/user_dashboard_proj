@@ -95,7 +95,9 @@ class PostManager(models.Manager):
             post.delete()
         except:
             print("Post doesn't exist")
-                
+
+class CommentManager(models.Manager):
+    pass
 
 class Post(models.Model):
     post_sender = models.ForeignKey(User, related_name='poster')
@@ -105,4 +107,11 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = PostManager()
 
-
+class Comment(models.Model):
+    comment_sender = models.ForeignKey(User, related_name='commenter')
+    target_post = models.ForeignKey(Post, related_name='target_post')
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = CommentManager()
+    

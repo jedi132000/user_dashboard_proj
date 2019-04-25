@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 border border-dark mt-4">
+                <div class="col-md-12 mt-4">
                         {% if messages %}
                         <ul class="messages">
                             {% for message in messages %}
@@ -67,9 +67,10 @@
                         </ul>
                         {% endif %} 
                         <div class="form-group">
+                            <h3>Post id is:{{post.id}}</h3>
                             <label for="description">{{post.post_sender.first_name}} wrote: </label>
                             <textarea class="form-control border border-dark" name="content">{{post.content}}</textarea>
-                            <a class="float-right btn btn-primary border border-dark shadow-lg rounded-0" href="/dashboard/" role="button">Post</a>
+                            <a class="mt-4 float-right btn btn-primary border border-dark shadow-lg rounded-0" href="/dashboard/" role="button">Leave comment</a>
                         </div>
                 </div>
             </div>

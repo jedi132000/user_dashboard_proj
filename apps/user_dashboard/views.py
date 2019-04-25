@@ -93,6 +93,8 @@ def post(request, target_id):
 
     return redirect (f"/users/show/{target_id}")
     
+def comment(request):
+    pass
 
 def destroy(request):
     pass

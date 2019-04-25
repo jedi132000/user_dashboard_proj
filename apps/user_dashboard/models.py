@@ -92,8 +92,6 @@ class PostManager(models.Manager):
             post.delete()
             except:
                 print("Post doesn't exist")
-    
-
 
 class Post(models.Model):
     post_sender = models.ForeignKey(User, related_name='poster')

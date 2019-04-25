@@ -80,7 +80,7 @@ class PostManager(models.Manager):
         post = Post.objects.create(
             content = form['content'],
             post_sender = User.objects.get(id=user_id),
-            post_receiver = User,objects.get(id=target_id)
+            post_receiver = User.objects.get(id=target_id)
         )
         return post.id
 
@@ -90,8 +90,9 @@ class PostManager(models.Manager):
             if post.post_reciever.id != user_id and post.post_sender.id != user_id:
                 return 
             post.delete()
-            except:
-                print("Post doesn't exist")
+        except:
+            print("Post doesn't exist")
+                
 
 class Post(models.Model):
     post_sender = models.ForeignKey(User, related_name='poster')

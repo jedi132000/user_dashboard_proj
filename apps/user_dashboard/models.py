@@ -96,9 +96,6 @@ class PostManager(models.Manager):
         except:
             print("Post doesn't exist")
 
-class CommentManager(models.Manager):
-    pass
-
 class Post(models.Model):
     post_sender = models.ForeignKey(User, related_name='poster')
     post_reciever = models.ForeignKey(User, related_name='postee')
@@ -106,6 +103,21 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = PostManager()
+
+class CommentManager(models.Manager):
+    def validate_comment(self, form):
+        errors = []
+        if len(form['content']) < 1:
+            errors.append('Comment cannot be empty')
+        return errors
+
+    def easy_comment_create(self, form, user_id, post_id):
+        comment = Comment.objects.create(
+            content=form['content'],
+            comment_sender=User.objects.get(id=user_id),
+            target_post=Post.objects.get(id=post_id)
+        )
+        return comment.id
 
 class Comment(models.Model):
     comment_sender = models.ForeignKey(User, related_name='commenter')

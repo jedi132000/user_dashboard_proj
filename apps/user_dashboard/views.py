@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Post
+from .models import User, Post, Comment
 from django.contrib import messages
 # Create your views here.
 
@@ -79,7 +79,9 @@ def show_user(request, user_id):
     context = {
         "this_user" : User.objects.get(id=user_id),
         "other_users": User.objects.all().exclude(id=request.session['user_id']),
-        "this_users_posts": Post.objects.filter(post_reciever=User.objects.get(id=user_id))
+        "this_users_posts": Post.objects.filter(post_reciever=User.objects.get(id=user_id)),
+        #not sure how to get the post id into the show_user page
+        "this_posts_comments":Comment.objects.filter(target_post=1),
     }
     return render(request,'user_dashboard/show.html', context)
 
@@ -93,8 +95,9 @@ def post(request, target_id):
 
     return redirect (f"/users/show/{target_id}")
     
-def comment(request):
-    pass
+def comment(request, post_id, target_id):
+    Comment.objects.easy_comment_create(request.POST, post_id, target_id)
+    return redirect (f"/users/show/{target_id}")
 
 def destroy(request):
     pass

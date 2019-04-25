@@ -11,18 +11,44 @@ def register(request):
     return render(request, 'user_dashboard/register.html')
 
 def create(request):
+    errors = User.objects.easy_register_validate(request.POST)
+    if errors:
+        for error in errors:
+            messages.error(request,error)
+        return redirect('/register/')
+    this_user = User.objects.easy_user_create(request.POST)
+    print('-'*50)
+    print(this_user)
+    print('-'*50)
     return redirect('/signin')
 
 def signin(request):
     return render(request, 'user_dashboard/signin.html')
 
 def login(request):
-    return redirect('/dashboard')
+    errors = User.objects.easy_login_validate(request.POST)
+    if errors:
+        for error in errors:
+            messages.error(request,error)
+        return redirect('/signin/')
+    user = User.objects.get(email=request.POST['email'])
+    request.session['user_id'] = user.id
+    if user.user_level == 9:
+        return redirect('/dashboard/admin/')
+    else:
+        return redirect('/dashboard/')
+
 
 def dashboard(request):
-    return render(request, 'user_dashboard/dashboard.html')
+    context = {
+        'all_users': User.objects.all()
+    }
+    return render(request, 'user_dashboard/dashboard.html', context)
 
 def admin_dashboard(request):
+    context = {
+        'all_users': User.objects.all()
+    }
     return render(request, 'user_dashboard/admin-dashboard.html')
 
 def new_user(request):

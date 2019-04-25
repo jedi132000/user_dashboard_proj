@@ -6,7 +6,7 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class UserManager(models.Manager):
     
-    def easy_register(self, form):
+    def easy_register_validate(self, form):
         errors = []
         if len(form['first_name']) < 2:
             errors.append('First Name should be at least 2 characters')
@@ -14,12 +14,13 @@ class UserManager(models.Manager):
             errors.append('Last Name should be at least 2 characters')
         if not EMAIL_REGEX.match(form['email']):
             errors.append('Email must be in a valid format')
-        matching_users= Users.Objects.filter(email=form['email'])
+        matching_users= User.objects.filter(email=form['email'])
         if matching_users:
             errors.append('Email already in use')
+        return errors
 
 
-    def easy_sigin(self, form):
+    def easy_login_validate(self, form):
         errors =[]
         if len(form['email']) < 1:
             errors.append("Email can't be blank")
@@ -42,12 +43,11 @@ class UserManager(models.Manager):
             user_level = 1
         else:
             user_level = 9
-        user = Users.objects.create(
+        user = User.objects.create(
             first_name = form ['first_name'],
             last_name = form['last_name'],
             email = form['email'],
             user_level = user_level,
-            description = form['description'],
             pw_hash = pw_hash
         )
         return user
@@ -60,7 +60,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=45)
     email = models.CharField(max_length=255)
     user_level = models.IntegerField()
-    description = models.TextField()
+    description = models.TextField(blank= True)
     pw_hash = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

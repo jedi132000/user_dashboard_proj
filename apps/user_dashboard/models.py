@@ -67,11 +67,43 @@ class User(models.Model):
     objects = UserManager()
 
 
+
+class PostManager(models.Manager):
+    def validate_post(self, form):
+        errors = []
+        if len(form['content']) < 1:
+            errors.append('Post cannot be left empty')
+        return errors
+    
+
+    def easy_post_create(self, form, user_id, target_id):
+        post = Post.objects.create(
+            content = form['content'],
+            post_sender = User.objects.get(id=user_id),
+            post_receiver = User,objects.get(id=target_id)
+        )
+        return post.id
+
+    def easy_post_delete(self,post_id, user_id):
+        try:
+            post = Post.objects.get(id=post_id)
+            if post.post_reciever.id != user_id and post.post_sender.id != user_id:
+                return 
+            post.delete()
+            except:
+                print("Post doesn't exist")
+    
+
+
+
+
+
 class Post(models.Model):
     post_sender = models.ForeignKey(User, related_name='poster')
     post_reciever = models.ForeignKey(User, related_name='postee')
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = PostManager()
 
 

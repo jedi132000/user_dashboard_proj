@@ -21,6 +21,15 @@
         <div class="container mt-4">
             <div class="col-md-4">
             <h4>Signin</h4>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>                  
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+            </ul>
+            {% endif %} 
             <form class="mb-4" action="/login/" method="POST">
                 {% csrf_token %}
                 <div class="form-group">

@@ -43,15 +43,21 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for user in all_users %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td><a href="/users/show/{{user.id}}">Michael Choi</a></td>
-                        <td>micahel@village88.com</td>
-                        <td>Dec 24th 2012</td>
-                        <td>admin</td>
+                        <th scope="row">{{user.id}}</th>
+                        <td><a href="/users/show/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.created_at}}</td>
+                        {% if user.user_level == 9 %}
+                        <td>Admin</td>
+                        {% else %}
+                        <td>Normal</td>
+                        {% endif %}
                         <td><a class="mr-3" href="/users/edit/{{user.id}}">edit</a><a href="/remove/{{user.id}}">remove</a></td>
                     </tr>
-                    <tr>
+                    {% endfor %}
+                    <!-- <tr>
                         <th scope="row">2</th>
                         <td><a href="#">John Supsupin</a></td>
                         <td>john@village88.com</td>
@@ -66,7 +72,7 @@
                         <td>Dec 24th 2012</td>
                         <td>admin</td>
                         <td><a class="mr-3" href="#">edit</a><a href="#">remove</a></td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>

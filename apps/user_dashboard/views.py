@@ -49,7 +49,7 @@ def admin_dashboard(request):
     context = {
         'all_users': User.objects.all()
     }
-    return render(request, 'user_dashboard/admin-dashboard.html')
+    return render(request, 'user_dashboard/admin-dashboard.html', context)
 
 def new_user(request):
     return render(request, 'user_dashboard/new.html')

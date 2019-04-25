@@ -31,8 +31,8 @@ class UserManager(models.Manager):
         if  len(form['password']) < 1:
                 errors.append('Please enter a Password')
         else:
-             matching_user = User.objects.filter(email=form['email'])
-             if not bcrypt_checkpw(form['password'].encode(), matching_user.pw_hash.encode()):
+             matching_user = User.objects.get(email=form['email'])
+             if not bcrypt.checkpw(form['password'].encode(), matching_user.pw_hash.encode()):
                     errors.append('Password Incorrect')
         return errors
 

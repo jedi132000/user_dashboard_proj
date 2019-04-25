@@ -38,18 +38,20 @@
                     <th scope="col">Name</th>
                     <th scope="col">email</th>
                     <th scope="col">created_at</th>
-                    <th scope="col">updated_at</th>
+                    <th scope="col">user_level</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for user in all_users%}
                     <tr>
                         <th scope="row">1</th>
-                        <td><a href="users/edit/{{user.id}}">Michael Choi</a></td>
-                        <td>micahel@village88.com</td>
-                        <td>Dec 24th 2012</td>
-                        <td>admin</td>
+                        <td><a href="users/edit/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.created_at}}</td>
+                        <td>{{user.user_level}}</td>
                     </tr>
-                    <tr>
+                    {% endfor %}
+                    <!-- <tr>
                         <th scope="row">2</th>
                         <td><a href="#">John Supsupin</a></td>
                         <td>john@village88.com</td>
@@ -62,7 +64,7 @@
                         <td>kb@village88.com</td>
                         <td>Dec 24th 2012</td>
                         <td>admin</td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>

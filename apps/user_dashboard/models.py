@@ -95,9 +95,6 @@ class PostManager(models.Manager):
     
 
 
-
-
-
 class Post(models.Model):
     post_sender = models.ForeignKey(User, related_name='poster')
     post_reciever = models.ForeignKey(User, related_name='postee')

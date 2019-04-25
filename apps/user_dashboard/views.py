@@ -20,7 +20,10 @@ def create(request):
     print('-'*50)
     print(this_user)
     print('-'*50)
-    return redirect('/signin')
+    if 'user_id' not in request.session:
+         return redirect('/signin')
+    return redirect('/dashboard/')
+   
 
 def signin(request):
     return render(request, 'user_dashboard/signin.html')
@@ -74,10 +77,22 @@ def update_desc(request):
 
 def show_user(request,user_id):
 
-    return render(request,'user_dashboard/show.html')
+    context = {
+        "this_user" : User.objects.get(id=user_id),
+        "other_users": User.objects.all().exclude(id=request.session['user_id']),
+    }
+    return render(request,'user_dashboard/show.html', context)
 
-def post(request):
-    pass
+def post(request, target_id):
+    errors = Post.objects.validate_post(request.POST)
+    if errors:
+        for error in errors:
+            messages.error(request,error)
+        return redirect(f"/users/show/{target_id}")
+    Post.objects.easy_post_create(request.POST, request.session['user_id'], target_id)
+
+    return redirect (f"/users/show/{target_id}")
+    
 
 def destroy(request):
     pass

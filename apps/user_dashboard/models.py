@@ -75,12 +75,15 @@ class PostManager(models.Manager):
             errors.append('Post cannot be left empty')
         return errors
     
-
     def easy_post_create(self, form, user_id, target_id):
+        print('-' * 50)
+        print(user_id)
+        print(target_id)
+        print('-' * 50)
         post = Post.objects.create(
             content = form['content'],
             post_sender = User.objects.get(id=user_id),
-            post_receiver = User.objects.get(id=target_id)
+            post_reciever = User.objects.get(id=target_id)
         )
         return post.id
 

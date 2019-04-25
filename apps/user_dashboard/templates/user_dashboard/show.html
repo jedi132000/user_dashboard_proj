@@ -30,6 +30,7 @@
                     <p>Email address: {{this_user.email}}</p>
                     <p>Description: {{this_user.description}}</p>
                 </div>
+            </div>
             <div class="row">
                 <div class="col-md-12 border border-dark mt-4">
                         {% if messages %}
@@ -53,6 +54,26 @@
                     </form>
                 </div>
             </div>
+            {% for post in this_users_posts %}
+            <div class="row">
+                <div class="col-md-12 mt-4">
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>                  
+                                    {{ message }}
+                                </li>
+                                {% endfor %}
+                        </ul>
+                        {% endif %} 
+                        <div class="form-group">
+                            <label for="description">{{post.post_sender.first_name}} wrote: </label>
+                            <textarea class="form-control border border-dark" name="content">{{post.content}}</textarea>
+                            <a class="float-right btn btn-primary border border-dark shadow-lg rounded-0" href="/dashboard/" role="button">Post</a>
+                        </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

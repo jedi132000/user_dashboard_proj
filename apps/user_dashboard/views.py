@@ -75,11 +75,11 @@ def update_pw(request):
 def update_desc(request):
     pass
 
-def show_user(request,user_id):
-
+def show_user(request, user_id):
     context = {
         "this_user" : User.objects.get(id=user_id),
         "other_users": User.objects.all().exclude(id=request.session['user_id']),
+        "this_users_posts": Post.objects.filter(post_reciever=User.objects.get(id=user_id))
     }
     return render(request,'user_dashboard/show.html', context)
 

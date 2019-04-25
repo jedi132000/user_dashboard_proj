@@ -40,6 +40,9 @@ def login(request):
 
 
 def dashboard(request):
+    user = User.objects.get(id=request.session['user_id'])
+    if user.user_level == 9:
+        return redirect('/dashboard/admin/')
     context = {
         'all_users': User.objects.all()
     }
@@ -57,7 +60,7 @@ def new_user(request):
 def edit(request):
     return render(request, 'user_dashboard/user_edit.html')
 
-def edit_user(request):
+def edit_user(request,user_id):
     return render(request, 'user_dashboard/admin_edit.html')
 
 def update_user(request):
@@ -69,8 +72,9 @@ def update_pw(request):
 def update_desc(request):
     pass
 
-def show_user(request):
-    pass
+def show_user(request,user_id):
+
+    return render(request,'user_dashboard/show.html')
 
 def post(request):
     pass

@@ -74,14 +74,14 @@
                     </div>
                 </div>
             </div>
-            {% if posts %}
-            {% for comment in this_posts_comments %}
+            {%  if comment.target_post.id == post.id %}
+            {% for comment in all_comments %}
             <div class="row mt-3">
                 <div class="col-md-1"></div>
                 <div class="col-md-11">
                     <div class="form-group">
-                        <label for="description">Comment-author wrote: </label>
-                        <textarea class="form-control border border-dark" name="content">Comment content</textarea>
+                        <label for="description">{{comment.comment_sender.first_name}} wrote: </label>
+                        <textarea class="form-control border border-dark" name="content">{{comment.content}}</textarea>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
             <div class="row mt-3">
                 <div class="col-md-1"></div>
                 <div class="col-md-11">
-                    <form action="/comment/{{post.id}}/{{post.post_sender.id}}/" method="POST">
+                    <form action="/comment/{{post.id}}/{{post.post_reciever.id}}/" method="POST">
                         {% csrf_token %}
                         <div class="form-group">
                             <textarea class="form-control border border-dark" name="content" placeholder="write a message"></textarea>

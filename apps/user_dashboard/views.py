@@ -80,8 +80,7 @@ def show_user(request, user_id):
         "this_user" : User.objects.get(id=user_id),
         "other_users": User.objects.all().exclude(id=request.session['user_id']),
         "this_users_posts": Post.objects.filter(post_reciever=User.objects.get(id=user_id)),
-        #not sure how to get the post id into the show_user page
-        "this_posts_comments":Comment.objects.filter(target_post=1),
+        "all_comments": Comment.objects.all(),
     }
     return render(request,'user_dashboard/show.html', context)
 

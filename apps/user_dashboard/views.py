@@ -96,8 +96,10 @@ def post(request, target_id):
     return redirect (f"/users/show/{target_id}")
     
 def comment(request, post_id, target_id):
+    this_post = Post.objects.get(post_id)
+    post_receiver = this_post.post_reciever
     Comment.objects.easy_comment_create(request.POST, post_id, target_id)
-    return redirect (f"/users/show/{target_id}")
+    return redirect (f"/users/show/{post_receiver.id}")
 
 def destroy(request):
     pass
